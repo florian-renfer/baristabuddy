@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
+import '../widgets/recipe_list_entry.dart';
+
 // This class represents attributes of a brewing recipe.
 class Recipe {
   int id = -1;
@@ -124,17 +126,7 @@ class RecipeList extends StatelessWidget {
             BuildContext context,
             int index,
           ) {
-            return CupertinoListTile(
-              title: _recipes[index].name,
-              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-              backgroundColor:
-                  index % 2 == 0
-                      ? CupertinoColors.tertiarySystemBackground
-                      : CupertinoColors.secondarySystemBackground,
-              additionalInfo: Text(
-                DateFormat('MM/dd/yyyy').format(_recipes[index].updatedAt),
-              ),
-            );
+            return RecipeListEntry();
           }, childCount: _recipes.length),
         ),
       ],
