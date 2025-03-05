@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:baristabuddy/screens/dial_in.dart';
 import 'package:baristabuddy/screens/recipes.dart';
 
 class DefaultLayout extends StatelessWidget {
@@ -14,23 +15,31 @@ class DefaultLayout extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.book),
             label: 'Recipes',
-            activeIcon: Icon(CupertinoIcons.book_fill),
+            activeIcon: Icon(CupertinoIcons.book_solid),
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.gear),
             label: 'Dial in',
+            activeIcon: Icon(CupertinoIcons.gear_solid),
           ),
         ],
       ),
       tabBuilder: (context, index) {
         late final CupertinoTabView returnValue;
         switch (index) {
-          default:
+          case 0:
             returnValue = CupertinoTabView(
               builder: (context) {
                 return CupertinoPageScaffold(
                   child: Center(child: RecipeList()),
                 );
+              },
+            );
+            break;
+          case 1:
+            returnValue = CupertinoTabView(
+              builder: (context) {
+                return DialIn();
               },
             );
             break;
