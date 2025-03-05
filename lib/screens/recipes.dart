@@ -28,84 +28,86 @@ class RecipeList extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        CupertinoSliverNavigationBar(
-          largeTitle: const Text('Recipes'),
-          leading: Container(
-            width: 32.0,
-            height: 32.0,
-            decoration: BoxDecoration(
-              color: CupertinoColors.secondarySystemBackground,
-              shape: BoxShape.circle,
-            ),
-            child: CupertinoButton(
-              padding: EdgeInsets.zero,
-              alignment: Alignment.center,
-              borderRadius: BorderRadius.circular(20),
-              onPressed: () => print('Select recipes'),
-              child: Icon(
-                CupertinoIcons.ellipsis,
-                color: CupertinoColors.secondaryLabel,
-                size: 20,
+    return SafeArea(
+      child: CustomScrollView(
+        slivers: <Widget>[
+          CupertinoSliverNavigationBar(
+            largeTitle: const Text('Recipes'),
+            leading: Container(
+              width: 32.0,
+              height: 32.0,
+              decoration: BoxDecoration(
+                color: CupertinoColors.secondarySystemBackground,
+                shape: BoxShape.circle,
+              ),
+              child: CupertinoButton(
+                padding: EdgeInsets.zero,
+                alignment: Alignment.center,
+                borderRadius: BorderRadius.circular(20),
+                onPressed: () => print('Select recipes'),
+                child: Icon(
+                  CupertinoIcons.ellipsis,
+                  color: CupertinoColors.secondaryLabel,
+                  size: 20,
+                ),
               ),
             ),
-          ),
-          trailing: Container(
-            width: 32.0,
-            height: 32.0,
-            decoration: BoxDecoration(
-              color: CupertinoColors.systemBrown,
-              shape: BoxShape.circle,
-            ),
-            child: CupertinoButton(
-              padding: EdgeInsets.zero,
-              alignment: Alignment.center,
-              borderRadius: BorderRadius.circular(20),
-              onPressed: () => {_navigateToNewScreen(context)},
-              child: Icon(
-                CupertinoIcons.add,
-                color: CupertinoColors.white,
-                size: 20,
+            trailing: Container(
+              width: 32.0,
+              height: 32.0,
+              decoration: BoxDecoration(
+                color: CupertinoColors.systemBrown,
+                shape: BoxShape.circle,
               ),
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: FractionallySizedBox(
-            widthFactor: 0.94,
-            child: ClipRect(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 16, bottom: 16),
-                child: CupertinoSearchTextField(
-                  controller: null,
-                  onChanged: (value) {
-                    print('Search changed');
-                  },
-                  onSubmitted: (value) {
-                    print('Search changed');
-                  },
-                  onSuffixTap: () {
-                    print('Search changed');
-                  },
+              child: CupertinoButton(
+                padding: EdgeInsets.zero,
+                alignment: Alignment.center,
+                borderRadius: BorderRadius.circular(20),
+                onPressed: () => {_navigateToNewScreen(context)},
+                child: Icon(
+                  CupertinoIcons.add,
+                  color: CupertinoColors.white,
+                  size: 20,
                 ),
               ),
             ),
           ),
-        ),
-        SliverGrid(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
-            childAspectRatio: 5,
+          SliverToBoxAdapter(
+            child: FractionallySizedBox(
+              widthFactor: 0.94,
+              child: ClipRect(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16, bottom: 16),
+                  child: CupertinoSearchTextField(
+                    controller: null,
+                    onChanged: (value) {
+                      print('Search changed');
+                    },
+                    onSubmitted: (value) {
+                      print('Search changed');
+                    },
+                    onSuffixTap: () {
+                      print('Search changed');
+                    },
+                  ),
+                ),
+              ),
+            ),
           ),
-          delegate: SliverChildBuilderDelegate((
-            BuildContext context,
-            int index,
-          ) {
-            return RecipeListEntry(recipe: _recipes[index]);
-          }, childCount: _recipes.length),
-        ),
-      ],
+          SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              childAspectRatio: 5,
+            ),
+            delegate: SliverChildBuilderDelegate((
+              BuildContext context,
+              int index,
+            ) {
+              return RecipeListEntry(recipe: _recipes[index]);
+            }, childCount: _recipes.length),
+          ),
+        ],
+      ),
     );
   }
 }
