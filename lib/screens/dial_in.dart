@@ -1,3 +1,4 @@
+import 'package:baristabuddy/widgets/pop_up_information_entry.dart';
 import 'package:flutter/cupertino.dart';
 
 class DialIn extends StatefulWidget {
@@ -43,7 +44,7 @@ class _DialInState extends State<DialIn> {
                         onTap:
                             () => _showPopupSurface(
                               context: context,
-                              child: Text('test'),
+                              child: PopUpInformationEntry(),
                             ),
                       ),
                       CupertinoListTile(
@@ -52,7 +53,7 @@ class _DialInState extends State<DialIn> {
                         onTap:
                             () => _showPopupSurface(
                               context: context,
-                              child: Text('test'),
+                              child: PopUpInformationEntry(),
                             ),
                       ),
                       CupertinoListTile(
@@ -61,7 +62,7 @@ class _DialInState extends State<DialIn> {
                         onTap:
                             () => _showPopupSurface(
                               context: context,
-                              child: Text('test'),
+                              child: PopUpInformationEntry(),
                             ),
                       ),
                       CupertinoListTile(
@@ -70,7 +71,7 @@ class _DialInState extends State<DialIn> {
                         onTap:
                             () => _showPopupSurface(
                               context: context,
-                              child: Text('test'),
+                              child: PopUpInformationEntry(),
                             ),
                       ),
                       CupertinoListTile(
@@ -79,7 +80,7 @@ class _DialInState extends State<DialIn> {
                         onTap:
                             () => _showPopupSurface(
                               context: context,
-                              child: Text('test'),
+                              child: PopUpInformationEntry(),
                             ),
                       ),
                     ],
