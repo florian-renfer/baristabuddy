@@ -1,4 +1,3 @@
-import 'package:baristabuddy/screens/recipes.dart';
 import 'package:flutter/cupertino.dart';
 
 // This widget displays details for the given recipe and allows editing recipe information.

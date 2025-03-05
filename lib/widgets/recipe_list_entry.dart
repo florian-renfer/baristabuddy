@@ -1,4 +1,4 @@
-import 'package:baristabuddy/screens/recipes.dart';
+import 'package:baristabuddy/models/recipe.dart';
 import 'package:baristabuddy/screens/recipe_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';

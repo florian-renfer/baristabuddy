@@ -1,18 +1,30 @@
-import 'package:baristabuddy/screens/recipes.dart';
+import 'package:baristabuddy/models/recipe.dart';
 import 'package:flutter/cupertino.dart';
 
 // This widget displays details for the given recipe and allows editing recipe information.
-class RecipeDetail extends StatelessWidget {
+class RecipeDetail extends StatefulWidget {
   final Recipe recipe;
+
+  const RecipeDetail({super.key, required this.recipe});
+
+  @override
+  RecipeDetailState createState() => RecipeDetailState();
+}
+
+class RecipeDetailState extends State<RecipeDetail> {
   bool _isEditing = false;
 
-  RecipeDetail({super.key, required this.recipe});
+  void _toggleEditing() {
+    setState(() {
+      _isEditing = !_isEditing;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text('Recipe details - ${recipe.name}'),
+        middle: Text('Recipe details - ${widget.recipe.name}'),
         trailing: Container(
           width: 32.0,
           height: 32.0,
@@ -24,9 +36,9 @@ class RecipeDetail extends StatelessWidget {
             padding: EdgeInsets.zero,
             alignment: Alignment.center,
             borderRadius: BorderRadius.circular(20),
-            onPressed: () => {_isEditing = !_isEditing},
+            onPressed: _toggleEditing,
             child: Icon(
-              CupertinoIcons.pen,
+              _isEditing ? CupertinoIcons.check_mark : CupertinoIcons.pen,
               color: CupertinoColors.white,
               size: 20,
             ),
@@ -39,12 +51,19 @@ class RecipeDetail extends StatelessWidget {
           child: ListView(
             children: [
               CupertinoFormSection.insetGrouped(
-                header: Text('Recipe name'),
+                header: Text('Recipe details'),
                 children: [
                   CupertinoTextFormFieldRow(
                     enabled: _isEditing,
-                    initialValue: recipe.name,
+                    initialValue: widget.recipe.name,
                     prefix: Text('Name'),
+                    textAlign: TextAlign.end,
+                    keyboardType: TextInputType.text,
+                  ),
+                  CupertinoTextFormFieldRow(
+                    enabled: _isEditing,
+                    initialValue: widget.recipe.beans,
+                    prefix: Text('Beans'),
                     textAlign: TextAlign.end,
                     keyboardType: TextInputType.text,
                   ),
@@ -55,6 +74,7 @@ class RecipeDetail extends StatelessWidget {
                 children: [
                   CupertinoTextFormFieldRow(
                     enabled: _isEditing,
+                    initialValue: widget.recipe.dose.toString(),
                     prefix: Text('Dose'),
                     textAlign: TextAlign.end,
                     keyboardType: TextInputType.numberWithOptions(
@@ -64,6 +84,7 @@ class RecipeDetail extends StatelessWidget {
                   ),
                   CupertinoTextFormFieldRow(
                     enabled: _isEditing,
+                    initialValue: widget.recipe.grindSize.toString(),
                     prefix: Text('Grind level'),
                     textAlign: TextAlign.end,
                     keyboardType: TextInputType.numberWithOptions(
@@ -78,6 +99,7 @@ class RecipeDetail extends StatelessWidget {
                 children: [
                   CupertinoTextFormFieldRow(
                     enabled: _isEditing,
+                    initialValue: widget.recipe.brewTime.toString(),
                     prefix: Text('Duration'),
                     textAlign: TextAlign.end,
                     keyboardType: TextInputType.numberWithOptions(
@@ -87,6 +109,7 @@ class RecipeDetail extends StatelessWidget {
                   ),
                   CupertinoTextFormFieldRow(
                     enabled: _isEditing,
+                    initialValue: widget.recipe.yield.toString(),
                     prefix: Text('Yield'),
                     textAlign: TextAlign.end,
                     keyboardType: TextInputType.numberWithOptions(
@@ -97,13 +120,15 @@ class RecipeDetail extends StatelessWidget {
                 ],
               ),
               CupertinoFormSection.insetGrouped(
-                header: Text('Additinoal information'),
+                header: Text('Additional information'),
                 footer: Text(
                   'Use this space to take notes, describe the taste or anything you would like to change about the recipe in the future. It\'s up to you.',
                 ),
                 children: [
                   CupertinoTextFormFieldRow(
                     enabled: _isEditing,
+                    initialValue:
+                        widget.recipe.notes == null ? widget.recipe.notes : '',
                     prefix: Text('Notes'),
                     textAlign: TextAlign.end,
                     keyboardType: TextInputType.text,

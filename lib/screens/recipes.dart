@@ -1,30 +1,7 @@
 import 'package:flutter/cupertino.dart';
-
-import '../widgets/recipe_list_entry.dart';
+import 'package:baristabuddy/models/recipe.dart';
 import 'package:baristabuddy/screens/recipe_create.dart';
-
-// This class represents attributes of a brewing recipe.
-class Recipe {
-  int id = -1;
-  String name = 'Coffee recipe';
-  double grindSize = -1.0;
-  double dose = -1.0;
-  double yield = -1.0;
-  double brewTime = -1.0;
-  DateTime createdAt = DateTime.now().toUtc();
-  DateTime updatedAt = DateTime.now().toUtc();
-  CupertinoDynamicColor color = CupertinoColors.systemRed;
-
-  Recipe({
-    this.id = -1,
-    this.name = 'Coffee recipe',
-    this.grindSize = -1.0,
-    this.dose = -1.0,
-    this.yield = -1.0,
-    this.brewTime = -1.0,
-    this.color = CupertinoColors.systemRed,
-  });
-}
+import 'package:baristabuddy/widgets/recipe_list_entry.dart';
 
 // This widget displays stored recipies as list.
 class RecipeList extends StatelessWidget {
@@ -38,17 +15,13 @@ class RecipeList extends StatelessWidget {
   }
 
   final _recipes = <Recipe>[
-    Recipe(id: 1, name: 'Espresso', color: CupertinoColors.systemPink),
-    Recipe(id: 2, name: 'Ristretto', color: CupertinoColors.systemPink),
-    Recipe(id: 3, name: 'Lungo', color: CupertinoColors.systemPink),
-    Recipe(id: 4, name: 'Americano', color: CupertinoColors.systemPink),
-    Recipe(id: 5, name: 'Latte Macchiato', color: CupertinoColors.systemPink),
-    Recipe(id: 6, name: 'Flat White', color: CupertinoColors.systemPink),
-    Recipe(id: 7, name: 'Cappuccino', color: CupertinoColors.systemPink),
     Recipe(
-      id: 8,
-      name: 'Espresso Macchiato',
-      color: CupertinoColors.systemPink,
+      name: 'Espresso doppio',
+      beans: 'Müller - Espresso Rossini',
+      dose: 18.0,
+      yield: 58.4,
+      brewTime: 31,
+      grindSize: 21,
     ),
   ];
 
