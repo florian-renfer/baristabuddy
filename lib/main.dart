@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-
-import 'home_page.dart';
+import 'package:baristabuddy/core/default_layout.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoApp(
       theme: CupertinoThemeData(brightness: Brightness.light),
-      home: CupertinoChatHomePage(),
+      home: DefaultLayout(),
       debugShowCheckedModeBanner: false,
     );
   }
