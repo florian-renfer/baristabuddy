@@ -1,70 +1,52 @@
+import 'package:baristabuddy/screens/recipes.dart';
+import 'package:baristabuddy/screens/recipe_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 // This class displays a list entry for a brewing recipe.
 class RecipeListEntry extends StatelessWidget {
-  const RecipeListEntry({super.key});
+  final Recipe recipe;
+
+  const RecipeListEntry({super.key, required this.recipe});
+
+  // This method opens a new screen and passes the BuildContext.
+  void _navigateToNewScreen(BuildContext context) {
+    Navigator.of(context).push(
+      CupertinoPageRoute(builder: (context) => RecipeDetail(recipe: recipe)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      // Specify a key if the Slidable is dismissible.
-      key: const ValueKey(0),
-
-      // The start action pane is the one at the left or the top side.
-      startActionPane: ActionPane(
-        // A motion is a widget used to control how the pane animates.
-        motion: const ScrollMotion(),
-
-        // A pane can dismiss the Slidable.
-        dismissible: DismissiblePane(onDismissed: () {}),
-
-        // All actions are defined in the children parameter.
-        children: const [
-          // A SlidableAction can have an icon and/or a label.
-          SlidableAction(
-            onPressed: null,
-            backgroundColor: Color(0xFFFE4A49),
-            foregroundColor: CupertinoColors.white,
-            icon: CupertinoIcons.delete,
-            label: 'Delete',
-          ),
-          SlidableAction(
-            onPressed: null,
-            backgroundColor: Color(0xFF21B7CA),
-            foregroundColor: CupertinoColors.white,
-            icon: CupertinoIcons.share,
-            label: 'Share',
-          ),
-        ],
-      ),
-
-      // The end action pane is the one at the right or the bottom side.
+      key: key,
+      closeOnScroll: true,
       endActionPane: const ActionPane(
         motion: ScrollMotion(),
         children: [
           SlidableAction(
-            // An action can be bigger than the others.
-            flex: 2,
+            flex: 1,
             onPressed: null,
-            backgroundColor: Color(0xFF7BC043),
+            backgroundColor: CupertinoColors.systemBrown,
             foregroundColor: CupertinoColors.white,
-            icon: CupertinoIcons.ellipsis,
+            icon: CupertinoIcons.folder,
             label: 'Archive',
-          ),
-          SlidableAction(
-            onPressed: null,
-            backgroundColor: Color(0xFF0392CF),
-            foregroundColor: CupertinoColors.white,
-            icon: CupertinoIcons.flag,
-            label: 'Save',
           ),
         ],
       ),
-
-      // The child of the Slidable is what the user sees when the
-      // component is not dragged.
-      child: const CupertinoListTile(title: Text('Slide me')),
+      child: CupertinoListTile(
+        onTap: () => _navigateToNewScreen(context),
+        padding: EdgeInsets.all(16),
+        title: Text(
+          recipe.name,
+          style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+            fontSize: 18.0,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        subtitle: Text('This is a recipe for ${recipe.name}'),
+        trailing: CupertinoListTileChevron(),
+      ),
     );
   }
 }

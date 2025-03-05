@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 
 import '../widgets/recipe_list_entry.dart';
+import 'package:baristabuddy/screens/recipe_create.dart';
 
 // This class represents attributes of a brewing recipe.
 class Recipe {
   int id = -1;
-  Text name = Text('Coffee recipe');
+  String name = 'Coffee recipe';
   double grindSize = -1.0;
   double dose = -1.0;
   double yield = -1.0;
@@ -17,7 +17,7 @@ class Recipe {
 
   Recipe({
     this.id = -1,
-    this.name = const Text('Coffee recipe'),
+    this.name = 'Coffee recipe',
     this.grindSize = -1.0,
     this.dose = -1.0,
     this.yield = -1.0,
@@ -30,21 +30,24 @@ class Recipe {
 class RecipeList extends StatelessWidget {
   RecipeList({super.key});
 
+  // This method opens a new screen and passes the BuildContext.
+  void _navigateToNewScreen(BuildContext context) {
+    Navigator.of(
+      context,
+    ).push(CupertinoPageRoute(builder: (context) => RecipeCreate()));
+  }
+
   final _recipes = <Recipe>[
-    Recipe(id: 1, name: Text('Espresso'), color: CupertinoColors.systemPink),
-    Recipe(id: 2, name: Text('Ristretto'), color: CupertinoColors.systemPink),
-    Recipe(id: 3, name: Text('Lungo'), color: CupertinoColors.systemPink),
-    Recipe(id: 4, name: Text('Americano'), color: CupertinoColors.systemPink),
-    Recipe(
-      id: 5,
-      name: Text('Latte Macchiato'),
-      color: CupertinoColors.systemPink,
-    ),
-    Recipe(id: 6, name: Text('Flat White'), color: CupertinoColors.systemPink),
-    Recipe(id: 7, name: Text('Cappuccino'), color: CupertinoColors.systemPink),
+    Recipe(id: 1, name: 'Espresso', color: CupertinoColors.systemPink),
+    Recipe(id: 2, name: 'Ristretto', color: CupertinoColors.systemPink),
+    Recipe(id: 3, name: 'Lungo', color: CupertinoColors.systemPink),
+    Recipe(id: 4, name: 'Americano', color: CupertinoColors.systemPink),
+    Recipe(id: 5, name: 'Latte Macchiato', color: CupertinoColors.systemPink),
+    Recipe(id: 6, name: 'Flat White', color: CupertinoColors.systemPink),
+    Recipe(id: 7, name: 'Cappuccino', color: CupertinoColors.systemPink),
     Recipe(
       id: 8,
-      name: Text('Espresso Macchiato'),
+      name: 'Espresso Macchiato',
       color: CupertinoColors.systemPink,
     ),
   ];
@@ -86,7 +89,7 @@ class RecipeList extends StatelessWidget {
               padding: EdgeInsets.zero,
               alignment: Alignment.center,
               borderRadius: BorderRadius.circular(20),
-              onPressed: () => print('Add recipe'),
+              onPressed: () => {_navigateToNewScreen(context)},
               child: Icon(
                 CupertinoIcons.add,
                 color: CupertinoColors.white,
@@ -97,7 +100,7 @@ class RecipeList extends StatelessWidget {
         ),
         SliverToBoxAdapter(
           child: FractionallySizedBox(
-            widthFactor: 0.9,
+            widthFactor: 0.94,
             child: ClipRect(
               child: Padding(
                 padding: const EdgeInsets.only(top: 16, bottom: 16),
@@ -126,7 +129,7 @@ class RecipeList extends StatelessWidget {
             BuildContext context,
             int index,
           ) {
-            return RecipeListEntry();
+            return RecipeListEntry(recipe: _recipes[index]);
           }, childCount: _recipes.length),
         ),
       ],
