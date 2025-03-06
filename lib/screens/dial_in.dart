@@ -68,6 +68,7 @@ class _DialInState extends State<DialIn> {
   }) {
     showCupertinoModalPopup<void>(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return CupertinoPopupSurface(
           isSurfacePainted: _shouldPaintSurface,
@@ -88,7 +89,7 @@ class _DialInState extends State<DialIn> {
                                     CupertinoTheme.of(
                                       context,
                                     ).scaffoldBackgroundColor,
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
                       child: child,
                     ),

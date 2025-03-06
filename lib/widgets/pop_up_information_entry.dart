@@ -14,7 +14,7 @@ class PopUpInformationEntry extends StatelessWidget {
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: CupertinoColors.secondarySystemBackground,
-        borderRadius: BorderRadius.all(Radius.circular(8)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         children: [
@@ -35,12 +35,14 @@ class PopUpInformationEntry extends StatelessWidget {
             child: Container(
               width: double.infinity,
               margin: EdgeInsets.only(top: 16),
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
                 color: CupertinoColors.systemBackground,
-                borderRadius: BorderRadius.all(Radius.circular(8)),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
-              child: Text(informationalContent.description),
+              child: ListView(
+                children: [Text(informationalContent.description)],
+              ),
             ),
           ),
         ],
