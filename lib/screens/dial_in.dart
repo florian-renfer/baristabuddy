@@ -1,3 +1,4 @@
+import 'package:baristabuddy/models/informational_content.dart';
 import 'package:baristabuddy/widgets/pop_up_information_entry.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -38,51 +39,18 @@ class _DialInState extends State<DialIn> {
                       ),
                     ),
                     children: [
-                      CupertinoListTile(
-                        title: const Text('Dosing'),
-                        trailing: CupertinoListTileChevron(),
-                        onTap:
-                            () => _showPopupSurface(
-                              context: context,
-                              child: PopUpInformationEntry(),
-                            ),
-                      ),
-                      CupertinoListTile(
-                        title: const Text('Grind size'),
-                        trailing: CupertinoListTileChevron(),
-                        onTap:
-                            () => _showPopupSurface(
-                              context: context,
-                              child: PopUpInformationEntry(),
-                            ),
-                      ),
-                      CupertinoListTile(
-                        title: const Text('Temperature'),
-                        trailing: CupertinoListTileChevron(),
-                        onTap:
-                            () => _showPopupSurface(
-                              context: context,
-                              child: PopUpInformationEntry(),
-                            ),
-                      ),
-                      CupertinoListTile(
-                        title: const Text('Water'),
-                        trailing: CupertinoListTileChevron(),
-                        onTap:
-                            () => _showPopupSurface(
-                              context: context,
-                              child: PopUpInformationEntry(),
-                            ),
-                      ),
-                      CupertinoListTile(
-                        title: const Text('Beans'),
-                        trailing: CupertinoListTileChevron(),
-                        onTap:
-                            () => _showPopupSurface(
-                              context: context,
-                              child: PopUpInformationEntry(),
-                            ),
-                      ),
+                      for (var informationalContent in informationalContents)
+                        CupertinoListTile(
+                          title: Text(informationalContent.title),
+                          trailing: CupertinoListTileChevron(),
+                          onTap:
+                              () => _showPopupSurface(
+                                context: context,
+                                child: PopUpInformationEntry(
+                                  informationalContent: informationalContent,
+                                ),
+                              ),
+                        ),
                     ],
                   ),
                 ]),

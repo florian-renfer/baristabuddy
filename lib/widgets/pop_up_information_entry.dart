@@ -1,7 +1,11 @@
+import 'package:baristabuddy/models/informational_content.dart';
 import 'package:flutter/cupertino.dart';
 
+// This class represents the contents of a informational pop up.
 class PopUpInformationEntry extends StatelessWidget {
-  const PopUpInformationEntry({super.key});
+  final InformationalContent informationalContent;
+
+  const PopUpInformationEntry({super.key, required this.informationalContent});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +14,7 @@ class PopUpInformationEntry extends StatelessWidget {
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: CupertinoColors.secondarySystemBackground,
-        borderRadius: BorderRadius.all(Radius.circular(16)),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
       child: Column(
         children: [
@@ -18,7 +22,7 @@ class PopUpInformationEntry extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Information',
+                informationalContent.title,
                 style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w500,
@@ -34,9 +38,9 @@ class PopUpInformationEntry extends StatelessWidget {
               padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: CupertinoColors.systemBackground,
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
-              child: Text('Information text....'),
+              child: Text(informationalContent.description),
             ),
           ),
         ],
