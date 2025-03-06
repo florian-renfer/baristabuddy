@@ -1,3 +1,4 @@
+import 'package:baristabuddy/db/sqlite.dart';
 import 'package:baristabuddy/models/recipe.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -14,10 +15,18 @@ class RecipeDetail extends StatefulWidget {
 class RecipeDetailState extends State<RecipeDetail> {
   bool _isEditing = false;
 
+  // Toggles the editing state.
   void _toggleEditing() {
     setState(() {
       _isEditing = !_isEditing;
     });
+  }
+
+  // Updates a persisted recipe.
+  Future<void> updateRecipe() async {
+    _toggleEditing();
+    widget.recipe.notes = 'Mit Notiz.';
+    return SqliteHelper.updateRecipe(widget.recipe);
   }
 
   @override
@@ -32,16 +41,34 @@ class RecipeDetailState extends State<RecipeDetail> {
             color: CupertinoColors.systemBrown,
             shape: BoxShape.circle,
           ),
-          child: CupertinoButton(
-            padding: EdgeInsets.zero,
-            alignment: Alignment.center,
-            borderRadius: BorderRadius.circular(20),
-            onPressed: _toggleEditing,
-            child: Icon(
-              _isEditing ? CupertinoIcons.check_mark : CupertinoIcons.pen,
-              color: CupertinoColors.white,
-              size: 20,
-            ),
+          child: Builder(
+            builder: (context) {
+              if (_isEditing) {
+                return CupertinoButton(
+                  padding: EdgeInsets.zero,
+                  alignment: Alignment.center,
+                  borderRadius: BorderRadius.circular(20),
+                  onPressed: () => updateRecipe(),
+                  child: Icon(
+                    CupertinoIcons.check_mark,
+                    color: CupertinoColors.white,
+                    size: 20,
+                  ),
+                );
+              }
+
+              return CupertinoButton(
+                padding: EdgeInsets.zero,
+                alignment: Alignment.center,
+                borderRadius: BorderRadius.circular(20),
+                onPressed: _toggleEditing,
+                child: Icon(
+                  CupertinoIcons.pen,
+                  color: CupertinoColors.white,
+                  size: 20,
+                ),
+              );
+            },
           ),
         ),
       ),
@@ -109,7 +136,7 @@ class RecipeDetailState extends State<RecipeDetail> {
                   ),
                   CupertinoTextFormFieldRow(
                     enabled: _isEditing,
-                    initialValue: widget.recipe.yield.toString(),
+                    initialValue: widget.recipe.yieldAmount.toString(),
                     prefix: Text('Yield'),
                     textAlign: TextAlign.end,
                     keyboardType: TextInputType.numberWithOptions(

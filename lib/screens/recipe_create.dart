@@ -1,8 +1,22 @@
+import 'package:baristabuddy/db/sqlite.dart';
+import 'package:baristabuddy/models/recipe.dart';
 import 'package:flutter/cupertino.dart';
 
 // This widget displays details for the given recipe and allows editing recipe information.
 class RecipeCreate extends StatelessWidget {
   const RecipeCreate({super.key});
+
+  Future<void> saveRecipe() async {
+    final Recipe recipe = Recipe(
+      name: 'Espresso',
+      brewTime: 31.0,
+      dose: 18.0,
+      grindSize: 21.0,
+      beans: 'Müller, Espresso Rossini',
+      yieldAmount: 61.4,
+    );
+    return SqliteHelper.createRecipe(recipe);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +34,7 @@ class RecipeCreate extends StatelessWidget {
             padding: EdgeInsets.zero,
             alignment: Alignment.center,
             borderRadius: BorderRadius.circular(20),
-            onPressed: () => print('saved'),
+            onPressed: () async => saveRecipe(),
             child: Icon(
               CupertinoIcons.checkmark,
               color: CupertinoColors.white,
